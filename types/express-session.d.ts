@@ -5,7 +5,9 @@ declare module 'express-session' {
         // Add any properties you store in the session here
         user?: {
             username?: string,
-            userId?: string
+            userId?: string,
+            isLoggedIn?: boolean,
+            fullname?: string
         };
     }
 }

@@ -4,6 +4,7 @@ import { postRouter } from "./src/routes/post.route";
 import { route404Middleware } from './src/middlewares/route404.middleware';
 import helmet from 'helmet';
 import express from 'express';
+import connectMongo from 'connect-mongo';
 import { configDotenv } from 'dotenv';
 import { db } from './src/services/db.service';
 import { authRouter } from './src/routes/auth.route';
@@ -20,10 +21,20 @@ app.use(express.static(__dirname + '/static'));
 app.use(helmet());
 
 app.use(session({
-    secret: 'your_secret_key',
+    name: 'social_app',
+    secret: 'jksdjsdsd_sk38934dskd894334_dkksjd_dkjsdk343',
+    store: connectMongo.create({
+        mongoUrl: process.env.MONGO_URI,
+        ttl: 1 * 24 * 60 * 60,
+        dbName: (process.env.NODE_ENV === 'production')
+            ? process.env.DB_NAME
+            : process.env.DB_NAME_DEV
+    }),
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: {
+        maxAge: 86400000,
+    }
 }));
 
 app.use('/posts', postRouter);

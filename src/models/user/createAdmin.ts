@@ -20,7 +20,7 @@ export const createAdmin = async () => {
                         const admin = new User({
                             email: adminEmail,
                             password: hash,
-                            role: 'Admin',
+                            role: 'admin',
                             fullName: 'Admin Admin',
                             profilePicture: 'default.png',
                         })

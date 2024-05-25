@@ -1,7 +1,9 @@
-import mongoose, { Schema, model } from "mongoose";
 import { createAdmin } from './createAdmin'
+import { UserModelType, UserType } from "../../../types/model/user/user.type";
+import { mongoose } from "../../services/db.service";
 
-const userSchema = new Schema({
+
+const userSchema: mongoose.Schema = new mongoose.Schema<UserModelType>({
     email: { type: String, required: true },
     password: { type: String, required: true },
     role: { type: String, required: false, default: 'Admin' },
@@ -9,7 +11,7 @@ const userSchema = new Schema({
     profilePicture: { type: String, required: false },
 }, { timestamps: true });
 
-const User = mongoose.models.Users || model('Users', userSchema);
+const User = mongoose.models.Users || mongoose.model<UserModelType>('Users', userSchema);
 
 createAdmin();
 
