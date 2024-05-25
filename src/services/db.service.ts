@@ -23,4 +23,4 @@ const teardown = async () => {
 
 const db = { init, teardown }
 
-export { db }
+export { db, mongoose }

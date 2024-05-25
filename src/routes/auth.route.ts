@@ -5,6 +5,7 @@ import { registerController } from "../controllers/authControllers/register.cont
 import { otpController } from "../controllers/authControllers/otp.controller";
 import { changePasswordController } from "../controllers/authControllers/changePassword.controller";
 import { verifyOtpController } from "../controllers/authControllers/verifyOtp.controller";
+import { logoutController } from "../controllers/authControllers/logout.controller";
 
 const authRouter = Router();
 
@@ -13,6 +14,7 @@ authRouter.post("/login", loginController);
 authRouter.post("/register", registerController);
 authRouter.post("/otp", otpController);
 authRouter.post("/change-password", changePasswordController);
-authRouter.post("/verify-otp", verifyOtpController)
+authRouter.post("/verify-otp", verifyOtpController);
+authRouter.patch("/logout", logoutController);
 
 export { authRouter }
