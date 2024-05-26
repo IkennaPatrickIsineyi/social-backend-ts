@@ -11,7 +11,7 @@ import { authRouter } from './src/routes/auth.route';
 
 configDotenv();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -44,8 +44,21 @@ app.use('/', rootRouter);
 
 app.use('*', route404Middleware);
 
+const startServer = (port: number) => {
+    app.listen(port, () => console.log('Listening on port', port)).on('error', (err) => {
+        if (err.message.includes('EADDRINUSE')) {
+            console.log(`Port ${port} is in use, trying another port...`);
+            setTimeout(() => {
+                startServer(port + 1); // Try the next port
+            }, 1000);
+        } else {
+            console.error('Server error:', err);
+        }
+    });;
+}
+
 db.init().then(() => {
-    app.listen(PORT, () => console.log('Listening on port', PORT));
+    startServer(Number(PORT));
 }).catch((err) => {
     console.error(err);
     process.exit(1);
