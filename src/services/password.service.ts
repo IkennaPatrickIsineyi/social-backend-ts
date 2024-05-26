@@ -1,4 +1,7 @@
 import bcrypt from 'bcrypt';
+import { configDotenv } from 'dotenv';
+
+configDotenv()
 
 export const hashPassword = async (password: string) => {
     const rounds = 10;

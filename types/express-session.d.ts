@@ -7,7 +7,9 @@ declare module 'express-session' {
             username?: string,
             userId?: string,
             isLoggedIn?: boolean,
-            fullname?: string
+            fullname?: string,
+            email?: string,
+            token?: string,
         };
     }
 }
